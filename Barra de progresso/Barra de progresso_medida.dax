@@ -1,0 +1,26 @@
+
+Barra Progresso Dinâmica = 
+// Created bar progress
+
+VAR Percentual = [% sua medida]
+VAR ValorLimpo = MAX(0, MIN(1, Percentual)) 
+// Calculamos a largura total baseada no seu SVG original (265px)
+VAR LarguraDinamica = ValorLimpo * 264.19 // 264.19 é a largura máxima do seu path
+
+// Definição das Cores
+VAR CorForte = IF(Percentual < 0.7, "#FF4D4D", "#00B650") 
+VAR CorFraca = IF(Percentual < 0.7, "#FFDADA", "#9EFAC6") 
+
+RETURN
+"data:image/svg+xml;utf8," &
+"<svg width='265' height='18' viewBox='0 0 265 18' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <defs>
+        <clipPath id='round-corner'>
+            <path d='M7.49951 15.0764C3.35764 15.0339 0.0246059 11.6418 0.0549588 7.4998V7.4998C0.0853117 3.35782 3.46757 0.0345021 7.60944 0.0769558L256.749 2.6306C260.891 2.67306 264.224 6.06521 264.193 10.2072V10.2072C264.163 14.3492 260.781 17.6725 256.639 17.63L7.49951 15.0764Z' />
+        </clipPath>
+    </defs>
+
+    <path d='M7.49951 15.0764C3.35764 15.0339 0.0246059 11.6418 0.0549588 7.4998V7.4998C0.0853117 3.35782 3.46757 0.0345021 7.60944 0.0769558L256.749 2.6306C260.891 2.67306 264.224 6.06521 264.193 10.2072V10.2072C264.163 14.3492 260.781 17.6725 256.639 17.63L7.49951 15.0764Z' fill='" & CorFraca & "'/>
+    
+    <rect x='0' y='0' width='" & SUBSTITUTE(LarguraDinamica, ",", ".") & "' height='18' fill='" & CorForte & "' clip-path='url(#round-corner)' />
+</svg>"
